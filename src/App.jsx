@@ -1,10 +1,14 @@
 import './App.css'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 
 const App = () => {
 
-  const [toDos , setToDos] = useState([]);
+  const [toDos , setToDos] = useState(JSON.parse(localStorage.getItem('todos'))|| []);
   const [toDo , setToDo] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('todos' , JSON.stringify(toDos));
+  } , [toDos]);
 
   const handleInput = (e) => {
     setToDo(e.target.value);
